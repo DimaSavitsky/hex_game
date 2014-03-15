@@ -1,0 +1,6 @@
+development:
+  adapter: postgresql
+  database: hex_game_development
+  pool: 5
+  username: nox
+  password:
