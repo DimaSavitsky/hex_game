@@ -11,9 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140316093330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "players", force: true do |t|
+    t.string   "email",                           null: false
+    t.string   "crypted_password",                null: false
+    t.string   "salt",                            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "remember_me_token"
+    t.datetime "remember_me_token_expires_at"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
+    t.datetime "last_login_at"
+    t.datetime "last_logout_at"
+    t.datetime "last_activity_at"
+    t.string   "last_login_from_ip_address"
+  end
+
+  add_index "players", ["email"], name: "index_players_on_email", unique: true, using: :btree
+  add_index "players", ["last_logout_at", "last_activity_at"], name: "index_players_on_last_logout_at_and_last_activity_at", using: :btree
+  add_index "players", ["remember_me_token"], name: "index_players_on_remember_me_token", using: :btree
+  add_index "players", ["reset_password_token"], name: "index_players_on_reset_password_token", using: :btree
 
 end
